@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const StudentRoute = require('./routes/student.js');
+const SubjectRoute = require('./routes/subject.js');
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
     next();
 })
 app.use(StudentRoute);
+app.use(SubjectRoute);
 
 app.listen(port, () => {
     console.log(`Server listening at PORT : ${port}`)
