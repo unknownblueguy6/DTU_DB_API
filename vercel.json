@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "builds": [{ "src": "src/server.js", "use": "@now/node-server" }],
+  "rewrites" : [
+    {
+        "source" : "/student/:year/:branch/:roll_no",
+        "destination" : "src/server.js"
+    },
+    {
+        "source" : "/student",
+        "destination" : "src/server.js"
+    },
+    {
+        "source" : "/subject/:code",
+        "destination" : "src/server.js"
+    },
+    {
+        "source" : "/subject",
+        "destination" : "src/server.js"
+    },
+    {
+        "source" : "/department/:code/:index",
+        "destination" : "src/server.js"
+    },
+    {
+        "source" : "/search",
+        "destination" : "src/server.js"
+    }
+  ]
+}
