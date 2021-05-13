@@ -30,14 +30,14 @@ function isFirstYearRollNo(rollno){
 function findStudentFromRollNo(rollno, res){
     sanitisedRollNo = sanitiseRollNo(rollno);
     if (isValidRollNo(sanitisedRollNo)){
-        if (isFirstYearRollNo(sanitiseRollNo)){
-            Student.findOne({firstyearrollno : rn}).then((s) => {
+        if (isFirstYearRollNo(sanitisedRollNo)){
+            Student.findOne({firstyearrollno : sanitisedRollNo}).then((s) => {
                 console.log(s);
                 res.send(s);
             });
         }
         else{
-            Student.findOne({rollno : rn}).then((s) => {
+            Student.findOne({rollno : sanitisedRollNo}).then((s) => {
                 console.log(s);
                 res.send(s);
             });
