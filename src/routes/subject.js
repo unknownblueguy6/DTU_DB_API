@@ -9,18 +9,24 @@ function sanitiseSubCode(code){
 function findSubjectFromSubCode(code, res){
     sanitisedSubCode = sanitiseSubCode(code);
     Subject.findOne({code : sanitisedSubCode}).then((s) => {
-        console.log(s);
+        if(FLAGS.DEBUG){
+            console.log(s);
+        }
         res.send(s);
     });
 }
 
 router.get('/subject/:code', (req, res) => {
-    console.log(req.params.code);
+    if(FLAGS.DEBUG){
+        console.log(req.params.code);
+    }
     findSubjectFromSubCode(req.params.code, res);
 });
 
 router.post('/subject', (req, res) => {
-    console.log(req.body.code);
+    if(FLAGS.DEBUG){
+        console.log(req.body.code);
+    }
     findSubjectFromSubCode(req.body.code, res);
 });
 

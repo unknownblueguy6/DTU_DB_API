@@ -32,13 +32,17 @@ function findStudentFromRollNo(rollno, res){
     if (isValidRollNo(sanitisedRollNo)){
         if (isFirstYearRollNo(sanitisedRollNo)){
             Student.findOne({firstyearrollno : sanitisedRollNo}).then((s) => {
-                console.log(s);
+                if(FLAGS.DEBUG){
+                    console.log(s);
+                }
                 res.send(s);
             });
         }
         else{
             Student.findOne({rollno : sanitisedRollNo}).then((s) => {
-                console.log(s);
+                if(FLAGS.DEBUG){
+                    console.log(s);
+                }
                 res.send(s);
             });
         }
@@ -47,12 +51,16 @@ function findStudentFromRollNo(rollno, res){
 
 router.get('/student/:year/:branch/:roll_no', (req, res) => {
     const rollno = `${req.params.year}/${req.params.branch}/${req.params.roll_no}`;
-    console.log(rollno);
+    if(FLAGS.DEBUG){
+        console.log(rollno);
+    }
     findStudentFromRollNo(rollno, res);
 });
 
 router.post('/student', (req, res) => {
-    console.log(req.body.rollno);
+    if(FLAGS.DEBUG){
+        console.log(req.body.rollno);
+    }
     findStudentFromRollNo(req.body.rollno, res);
 });
 

@@ -7,7 +7,9 @@ const MAX_STUDENTS = 25
 function getStudentsByRank(code, index, order, res){
     Student.find({'dept.code' : code.toString()}, 'name cgpa deptrank unirank rollno').sort({'deptrank' : order}).skip(index * MAX_STUDENTS).limit(MAX_STUDENTS).then((students) => {
         if(students.length >= 0){
-            console.log(students);
+            if(FLAGS.DEBUG){
+                console.log(students);
+            }
             res.send(students);
         }
     });
@@ -16,7 +18,9 @@ function getStudentsByRank(code, index, order, res){
 function getStudentsByRollNumber(code, index, order, res){
     Student.find({'dept.code' : code.toString()}, 'name cgpa deptrank unirank rollno').sort({'rollno' : order}).skip(index * MAX_STUDENTS).limit(MAX_STUDENTS).then((students) => {
         if(students.length >= 0){
-            console.log(students);
+            if(FLAGS.DEBUG){
+                console.log(students);
+            }
             res.send(students);
         }
     });

@@ -20,7 +20,9 @@ function isValidRollNo(rollno){
 }
 
 function findSubjects(search, res){
-    console.log(search);
+    if(FLAGS.DEBUG){
+        console.log(search);
+    }
     search = search.trim();
     const searchRegex = RegExp('^' + search, 'i');
     const query = Subject.find();
@@ -28,14 +30,18 @@ function findSubjects(search, res){
     query.select('name code');
     query.then((subjects) =>{
         if(subjects.length >= 0){
-            console.log(subjects);
+            if(FLAGS.DEBUG){
+                console.log(subjects);
+            }
             res.send(subjects);
         }
     });
 }
 
 function findStudents(search, filters, res){
-    console.log(search);
+    if(FLAGS.DEBUG){
+        console.log(search);
+    }
     search = search.trim();
     const sanitisedSearch = search.toUpperCase().trim().replace(/\s+/g, '');
     
@@ -54,7 +60,9 @@ function findStudents(search, filters, res){
     query.select('name rollno cgpa dept');
     query.then((students) => {
         if(students.length >= 0){
-            console.log(students);
+            if(FLAGS.DEBUG){
+                console.log(students);
+            }
             res.send(students);
         }
     });

@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+require('./flags.js').setFlags(process.argv.slice(2));
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -24,7 +25,9 @@ const database = process.env.MONGO_DATABASE;
 mongoose.connect(`mongodb+srv://${user}:${password}@${server}/${database}?retryWrites=true&w=majority`);
 
 app.use((req, res, next) => {
-    console.log(`${new Date().toDateString()} => ${req.originalUrl}`);
+    if (FLAGS.DEBUG){
+        console.log(`${new Date().toDateString()} => ${req.originalUrl}`);
+    }
     next();
 })
 
@@ -34,5 +37,7 @@ app.use(DepartmentRoute);
 app.use(SearchRoute);
 
 app.listen(port, () => {
-    console.log(`Server listening at PORT : ${port}`)
+    if (FLAGS.DEBUG){
+        console.log(`Server listening at PORT : ${port}`)
+    }
 })

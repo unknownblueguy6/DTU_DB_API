@@ -6,7 +6,8 @@
   "scripts": {
     "start" : "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-watch": "nodemon src/server.js"
+    "start-watch": "nodemon src/server.js",
+    "start-debug": "nodemon src/server.js --debug"
   },
   "author": "",
   "license": "MIT",
