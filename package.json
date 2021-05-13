@@ -4,6 +4,7 @@
   "description": "A REST API to query records of students of Delhi Technological University",
   "main": "server.js",
   "scripts": {
+    "start" : "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-watch": "nodemon src/server.js"
   },
