@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const StudentRoute = require('./routes/student.js');
 const SubjectRoute = require('./routes/subject.js');
 const DepartmentRoute = require('./routes/dept.js');
+const SearchRoute = require('./routes/search.js');
 
 const app = express();
 app.use(express.json());
@@ -23,9 +24,11 @@ app.use((req, res, next) => {
     console.log(`${new Date().toDateString()} => ${req.originalUrl}`);
     next();
 })
+
 app.use(StudentRoute);
 app.use(SubjectRoute);
 app.use(DepartmentRoute);
+app.use(SearchRoute);
 
 app.listen(port, () => {
     console.log(`Server listening at PORT : ${port}`)
