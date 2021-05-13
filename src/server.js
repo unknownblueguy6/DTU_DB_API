@@ -1,12 +1,15 @@
 require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
 const StudentRoute = require('./routes/student.js');
 const SubjectRoute = require('./routes/subject.js');
 const DepartmentRoute = require('./routes/dept.js');
 const SearchRoute = require('./routes/search.js');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
