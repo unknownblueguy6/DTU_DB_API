@@ -10,6 +10,20 @@ const ROLL_NO_IND = 2;
 
 const YEAR_PREFIX = '2K';
 
+const STUDENT_SELECTED_FIELDS = {
+    name:1,
+    rollno:1,
+    cgpa: 1,
+    dept : {name : 1, code:1},
+    _id : 0
+}
+
+const SUBJECT_SELECTED_FIELDS = {
+    name : 1,
+    code : 1,
+    _id : 0
+}
+
 function isValidRollNo(rollno){
     const rn_arr = rollno.split('/');
     if (rn_arr.length != ROLL_NO_LENGTH) return false;
@@ -27,7 +41,8 @@ function findSubjects(search, res){
     const searchRegex = RegExp('^' + search, 'i');
     const query = Subject.find();
     query.or([{name : searchRegex}, {code : searchRegex}]);
-    query.select('name code');
+    query.select(SUBJECT_SELECTED_FIELDS);
+    query.lean();
     query.then((subjects) =>{
         if(subjects.length >= 0){
             if(FLAGS.DEBUG){
@@ -57,7 +72,8 @@ function findStudents(search, filters, res){
         else filters = {name : searchRegEx};
         query.and(filters);
     }
-    query.select('name rollno cgpa dept');
+    query.select(STUDENT_SELECTED_FIELDS);
+    query.lean();
     query.then((students) => {
         if(students.length >= 0){
             if(FLAGS.DEBUG){

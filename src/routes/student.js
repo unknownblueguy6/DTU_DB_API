@@ -10,6 +10,14 @@ const ROLL_NO_IND = 2
 const YEAR_PREFIX = '2K'; //all roll numbers in DTU are of the form 2KXX eg. 2K19
 const BRANCH_PREFIX = 'A' //first years can be in A or B eg. B2
 
+const SELECTED_FIELDS = {
+    _id: 0,
+    __v: 0,
+    dept: {_id:  0},
+    degree : { _id: 0},
+    semesters: { _id: 0, subjects: { _id: 0}}
+};
+
 function sanitiseRollNo(rollno){
     return rollno.toUpperCase().trim().replace(/\s+/g, '');
 }
@@ -31,7 +39,7 @@ function findStudentFromRollNo(rollno, res){
     sanitisedRollNo = sanitiseRollNo(rollno);
     if (isValidRollNo(sanitisedRollNo)){
         if (isFirstYearRollNo(sanitisedRollNo)){
-            Student.findOne({firstyearrollno : sanitisedRollNo}).then((s) => {
+            Student.findOne({firstyearrollno : sanitisedRollNo}, SELECTED_FIELDS).lean().then((s) => {
                 if(FLAGS.DEBUG){
                     console.log(s);
                 }
@@ -39,7 +47,7 @@ function findStudentFromRollNo(rollno, res){
             });
         }
         else{
-            Student.findOne({rollno : sanitisedRollNo}).then((s) => {
+            Student.findOne({rollno : sanitisedRollNo}, SELECTED_FIELDS).lean().then((s) => {
                 if(FLAGS.DEBUG){
                     console.log(s);
                 }
