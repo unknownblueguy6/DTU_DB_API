@@ -35,10 +35,20 @@ function isFirstYearRollNo(rollno){
     return !isNaN(rollno.split('/')[BRANCH_IND].slice(BRANCH_PREFIX.length));
 }
 
+function correctLength(rollno, len){
+    let pref = rollno.slice(0, rollno.lastIndexOf('/')+1);
+    let suff = rollno.slice(rollno.lastIndexOf('/')+1);
+    while (suff.length < len){
+        suff = '0' + suff; 
+    }
+    return pref + suff;
+}
+
 function findStudentFromRollNo(rollno, res){
-    sanitisedRollNo = sanitiseRollNo(rollno);
+    let sanitisedRollNo = sanitiseRollNo(rollno);
     if (isValidRollNo(sanitisedRollNo)){
         if (isFirstYearRollNo(sanitisedRollNo)){
+            sanitisedRollNo = correctLength(sanitisedRollNo, 2);
             Student.findOne({firstyearrollno : sanitisedRollNo}, SELECTED_FIELDS).lean().then((s) => {
                 if(FLAGS.DEBUG){
                     console.log(s);
@@ -47,6 +57,7 @@ function findStudentFromRollNo(rollno, res){
             });
         }
         else{
+            sanitisedRollNo = correctLength(sanitisedRollNo, 3)
             Student.findOne({rollno : sanitisedRollNo}, SELECTED_FIELDS).lean().then((s) => {
                 if(FLAGS.DEBUG){
                     console.log(s);
