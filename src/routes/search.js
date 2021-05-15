@@ -38,7 +38,7 @@ function findSubjects(search, res){
         console.log(search);
     }
     search = search.trim();
-    const searchRegex = RegExp('^' + search, 'i');
+    const searchRegex = RegExp('\\b' + search, 'i');
     const query = Subject.find();
     query.or([{name : searchRegex}, {code : searchRegex}]);
     query.select(SUBJECT_SELECTED_FIELDS);
