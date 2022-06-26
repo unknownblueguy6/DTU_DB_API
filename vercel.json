@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "builds": [{ "src": "src/server.js", "use": "@now/node-server" }],
+  "builds": [{ "src": "src/server.js", "use": "@vercel/node" }],
   "rewrites" : [
     {
         "source" : "/student/:year/:branch/:roll_no",
@@ -25,6 +25,10 @@
     {
         "source" : "/search",
         "destination" : "src/server.js"
+    },
+    {
+        "source" : "/university/:code",
+        "destination": "src/server.js"
     }
   ]
 }
