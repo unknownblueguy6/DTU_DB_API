@@ -25,6 +25,10 @@
     {
         "source" : "/search",
         "destination" : "src/server.js"
+    },
+    {
+        "source" : "/university/:code",
+        "destination": "src/server.js"
     }
   ]
 }
