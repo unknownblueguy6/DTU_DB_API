@@ -7,6 +7,7 @@ const cors = require('cors');
 const StudentRoute = require('./routes/student.js');
 const SubjectRoute = require('./routes/subject.js');
 const DepartmentRoute = require('./routes/dept.js');
+const UniversityRoute = require('./routes/university.js')
 const SearchRoute = require('./routes/search.js');
 
 const app = express();
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 app.use(StudentRoute);
 app.use(SubjectRoute);
 app.use(DepartmentRoute);
+app.use(UniversityRoute);
 app.use(SearchRoute);
 
 app.listen(port, () => {
